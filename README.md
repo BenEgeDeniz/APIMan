@@ -25,7 +25,7 @@ Or [download](https://github.com/BenEgeDeniz/APIMan/releases) APIMan directly an
 
 require __DIR__ . "/src/APIMan.php"; // Requiring APIMan.
 
-$api = new APIMan("https://api.benegedeniz.com/apitest"); // Creatina a new APIMan handle with API endpoint URL.
+$api = new APIMan("https://api.benegedeniz.com/apitest"); // Creating a new APIMan handle with API endpoint URL.
 
 $api->setHeaders([ // Setting headers to send (Optional, if you dont want to set headers, do not use this method.)
     "User-Agent: APIMan UG"
