@@ -1,0 +1,24 @@
+{
+    "name": "benegedeniz/apiman",
+    "type": "library",
+    "description": "A powerful API request manager class.",
+    "keywords": ["php api","apiman","php api manager","php api engine"],
+    "homepage": "https://github.com/BenEgeDeniz/APIMan",
+    "license": "CC-BY-NC-ND-4.0",
+    "authors": [
+        {
+            "name": "Ege Deniz",
+            "email": "ege@benegedeniz.com",
+            "homepage": "https://benegedeniz.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "APIMan": "src"
+        }
+    }
+}
