@@ -18,7 +18,7 @@
     },
     "autoload": {
         "psr-0": {
-            "BenEgeDeniz\\APIMan": "src"
+            "BenEgeDeniz\\": "src"
         }
     }
 }
