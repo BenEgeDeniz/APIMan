@@ -11,7 +11,7 @@ $api->setSSLConfig([ // Setting SSL configuration (Required. Leve this as it is 
 	"SSL_VERIFYPEER" => true,
 	"SSL_VERIFYHOST" => true
 ]);
-$api->setRequestType("post"); // Setting request type. SUpported request types are: get, post, put, delete.
+$api->setRequestType("post"); // Setting request type. Supported request types are: get, post, put, delete.
 $api->setData(http_build_query(["testParam" => "Test value"])); // Setting data to send. You can sen raw body too.
 $api->executeRequest(); // Sending request.
 
