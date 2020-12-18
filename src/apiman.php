@@ -10,6 +10,7 @@ class APIMan
 	private $endpoint;
 	private $headers;
 	private $data;
+	private $logHandle;
 	private $request;
 	private $proxyConfig;
 	private $sslConfig;
@@ -138,6 +139,23 @@ class APIMan
 
 	/**
 	 *
+	 * setLogFile
+	 *
+	 * This method will set your cURL log file.
+	 * 
+	 * @param string $path Log file location.
+	 *
+	 * @return void
+	 *
+	 */
+
+	public function setLogFile(string $path)
+	{
+		$this->logHandle = $path;
+	}
+
+	/**
+	 *
 	 * executeRequest
 	 *
 	 * This method will execute your request with your set parameters.
@@ -159,6 +177,16 @@ class APIMan
 
 		if ($this->sslConfig['SSL_VERIFYHOST'] === true)
 			curl_setopt($this->ch, CURLOPT_SSL_VERIFYHOST, 2);
+
+		if (isset($this->logHandle))
+		{
+			$this->logHandle = fopen($this->logHandle, "w");
+
+			curl_setopt($this->ch, CURLOPT_VERBOSE, true);
+			curl_setopt($this->ch, CURLOPT_STDERR, $this->logHandle);
+
+			unset($this->logHandle);
+		}
 
 		unset($this->sslConfig);
 
