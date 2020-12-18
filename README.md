@@ -20,7 +20,7 @@ Or [download](https://github.com/BenEgeDeniz/APIMan/releases) APIMan directly an
 
 ## Usage
 
-```
+```php
 <?php
 
 require __DIR__ . "/src/apiman.php"; // Requiring APIMan.
