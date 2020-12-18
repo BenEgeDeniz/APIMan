@@ -11,6 +11,7 @@ class APIMan
 	private $headers;
 	private $data;
 	private $request;
+	private $proxyConfig;
 	private $sslConfig;
 	private $ch;
 	private $return;
@@ -20,9 +21,9 @@ class APIMan
 		$this->endpoint = $endpoint;
 	}
 
-	public function setSSLConfig(array $config)
+	public function setProxy(array $proxy)
 	{
-		$this->sslConfig = $config;
+		$this->proxyConfig = $proxy;
 	}
 
 	public function setHeaders(array $headers)
@@ -45,6 +46,11 @@ class APIMan
 		$this->data = $data;
 	}
 
+	public function setSSLConfig(array $config)
+	{
+		$this->sslConfig = $config;
+	}
+
 	public function executeRequest()
 	{
 		if (gettype($this->sslConfig['SSL_VERIFYPEER']) != "boolean" || gettype($this->sslConfig['SSL_VERIFYPEER']) != "boolean")
@@ -52,6 +58,29 @@ class APIMan
 
 		$this->ch = curl_init();
 		curl_setopt($this->ch, CURLOPT_RETURNTRANSFER, true);
+
+		if (isset($this->proxyConfig['proxyType']) || isset($this->proxyConfig['proxy']))
+		{
+			$proxy = explode(":", $this->proxyConfig['proxy']);
+
+			curl_setopt($this->ch, CURLOPT_PROXY, $proxy[0]);
+			curl_setopt($this->ch, CURLOPT_PROXYPORT, $proxy[1]);
+
+			if (strtolower($this->proxyConfig['proxyType']) == "http")
+				curl_setopt($this->ch, CURLOPT_PROXYTYPE, CURLPROXY_HTTP);
+
+			if (strtolower($this->proxyConfig['proxyType']) == "https")
+				curl_setopt($this->ch, CURLOPT_PROXYTYPE, CURLPROXY_HTTPS);
+
+			if (strtolower($this->proxyConfig['proxyType']) == "socks4")
+				curl_setopt($this->ch, CURLOPT_PROXYTYPE, CURLPROXY_SOCKS4);
+
+			if (strtolower($this->proxyConfig['proxyType']) == "socks5")
+				curl_setopt($this->ch, CURLOPT_PROXYTYPE, CURLPROXY_SOCKS4);
+
+			if (isset($this->proxyConfig['auth']))
+				curl_setopt($this->ch, CURLOPT_PROXYUSERPWD, $this->proxyConfig['auth']);
+		}
 
 		if (!empty($this->headers))
 			curl_setopt($this->ch, CURLOPT_HTTPHEADER, $this->headers);
