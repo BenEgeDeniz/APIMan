@@ -23,7 +23,7 @@ Or [download](https://github.com/BenEgeDeniz/APIMan/releases) APIMan directly an
 ```
 <?php
 
-require __DIR__ . "/src/APIMan.php"; // Requiring APIMan.
+require __DIR__ . "/src/apiman.php"; // Requiring APIMan.
 
 $api = new APIMan("https://api.benegedeniz.com/apitest"); // Creating a new APIMan handle with API endpoint URL.
 
@@ -31,8 +31,8 @@ $api->setHeaders([ // Setting headers to send (Optional, if you don't want to se
     "User-Agent: APIMan UG"
 ]);
 $api->setSSLConfig([ // Setting SSL configuration (Required. Leave this as it is if you don't know what is this.)
-    "SSL_VERIFYPEER" => false, // Required parameter.
-    "SSL_VERIFYHOST" => false // Required parameter.
+    "SSL_VERIFYPEER" => true, // Required parameter. (If you get blank response from API, set this to false. If so, there is a good chance that you are using your own localhost.)
+    "SSL_VERIFYHOST" => true // Required parameter.
 ]);
 $api->setProxy([ // Setting proxy tunnel (Optional, if you don't want to use proxy, don't use this method.)
 	"proxy" => "204.101.61.82:4145", // Required, proxy IP. Format: ip:port.
@@ -46,7 +46,6 @@ $api->executeRequest(); // Sending request.
 echo $api->getRawResponse(); // Getting API response.
 
 ?>
-
 ```
 
 ## License
