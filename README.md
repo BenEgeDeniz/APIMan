@@ -1,6 +1,8 @@
 
 # APIMan
 
+<img src="https://img.shields.io/badge/build-passing-success">
+
 A powerful API request manager class.
 
 
