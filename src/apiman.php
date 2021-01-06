@@ -14,6 +14,7 @@ class APIMan
 	private $request;
 	private $proxyConfig;
 	private $sslConfig;
+	private $httpAuth;
 	private $ch;
 	private $return;
 
@@ -98,6 +99,23 @@ class APIMan
 
 	/**
 	 *
+	 * setHTTPAuth
+	 *
+	 * This method will set HTTP Authorization credentials.
+	 * 
+	 * @param string $credentials Your credentials. Format: username:password
+	 *
+	 * @return void
+	 *
+	 */
+
+	public function setHTTPAuth(string $credentials)
+	{
+		$this->httpAuth = $credentials;
+	}
+
+	/**
+	 *
 	 * setData
 	 *
 	 * This method will set your request type.
@@ -174,6 +192,9 @@ class APIMan
 		curl_setopt($this->ch, CURLOPT_HEADER, false);
 
 		curl_setopt($this->ch, CURLOPT_SSL_VERIFYPEER, $this->sslConfig['SSL_VERIFYPEER']);
+
+		if (!empty($this->httpAuth))
+			curl_setopt($this->ch, CURLOPT_USERPWD, $this->httpAuth);  
 
 		if ($this->sslConfig['SSL_VERIFYHOST'] === true)
 			curl_setopt($this->ch, CURLOPT_SSL_VERIFYHOST, 2);

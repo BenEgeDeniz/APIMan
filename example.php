@@ -12,6 +12,7 @@ $api->setSSLConfig([ // Setting SSL configuration (Required. Leave this as it is
     "SSL_VERIFYHOST" => true // Required parameter.
 ]);
 $api->setLogFile("log.txt"); // Logging file location. (Optional, if you don't want to use logging, don't use this method.)
+$api->setHTTPAuth("username:password"); // Setting basic HTTP authentication credentials (Optional, if you don't want to use HTTP authentication, don't use this method.)
 $api->setProxy([ // Setting proxy tunnel (Optional, if you don't want to use proxy, don't use this method.)
 	"proxy" => "204.101.61.82:4145", // Required, proxy IP. Format: ip:port.
 	"proxyType" => "socks5", // Required, proxy type. Supported types: http, https, socks4 and socks5.
