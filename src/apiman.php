@@ -1,7 +1,7 @@
 <?php
 
 /**
- * APIMaster - A powerful API request manager class.
+ * APIMan - A powerful API request manager class.
  * Developer: TimberLock
  * Developer Website: benegedeniz.com
  */
