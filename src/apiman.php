@@ -126,7 +126,7 @@ class APIMan
 	 *
 	 */
 
-	public function setData($data)
+	public function setData($data = null)
 	{
 		$this->data = $data;
 	}
