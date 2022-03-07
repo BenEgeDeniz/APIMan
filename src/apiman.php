@@ -274,9 +274,26 @@ class APIMan
 				curl_setopt($this->ch, CURLOPT_POSTFIELDS, $this->data);
 		}
 
+		curl_setopt($this->ch, CURLOPT_HEADERFUNCTION,
+			function ($curl, $header) use (&$respHeaders)
+			{
+				$len = strlen($header);
+				$header = explode(':', $header, 2);
+
+				if (count($header) < 2) 
+					return $len;
+
+				$respHeaders[strtolower(trim($header[0]))][] = trim($header[1]);
+
+				return $len;
+			}
+		);
+
 		unset($this->data, $this->request, $this->endpoint);
 
-		$this->return = curl_exec($this->ch);
+		$this->return['content'] = curl_exec($this->ch);
+		$this->return['responseCode'] = curl_getinfo($this->ch, CURLINFO_RESPONSE_CODE);
+		$this->return['respHeaders'] = $respHeaders;
 		curl_close($this->ch);
 
 		unset($this->ch);
@@ -294,9 +311,37 @@ class APIMan
 
 	public function getRawResponse()
 	{
-		return $this->return;
+		return $this->return['content'];
+	}
 
-		unset($this->return);
+	/**
+	 *
+	 * getResponseCode
+	 *
+	 * This method will return the response code from the request.
+	 *
+	 * @return Response-code from your API endpoint.
+	 *
+	 */
+
+	public function getResponseCode()
+	{
+		return $this->return['responseCode'];
+	}
+
+	/**
+	 *
+	 * getResponseHeaders
+	 *
+	 * This method will return the response headers from the request as array.
+	 *
+	 * @return Response-headers from your API endpoint.
+	 *
+	 */
+
+	public function getResponseHeaders()
+	{
+		return $this->return['respHeaders'];
 	}
 }
 
