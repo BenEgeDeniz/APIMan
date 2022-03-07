@@ -22,6 +22,8 @@ $api->setRequestType("post"); // Setting request type. Supported request types a
 $api->setData(http_build_query(["testParam" => "Test value"])); // Setting data to send. You can send raw body too.
 $api->executeRequest(); // Sending request.
 
-echo $api->getRawResponse(); // Getting API response.
+echo $api->getRawResponse(); // Printing API response.
+print_r($api->getResponseHeaders()); // Printing API response header array.
+echo $api->getResponseCode()); // Printing API response code.
 
 ?>
