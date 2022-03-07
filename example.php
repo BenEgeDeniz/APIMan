@@ -24,6 +24,6 @@ $api->executeRequest(); // Sending request.
 
 echo $api->getRawResponse(); // Printing API response.
 print_r($api->getResponseHeaders()); // Printing API response header array.
-echo $api->getResponseCode()); // Printing API response code.
+echo $api->getResponseCode(); // Printing API response code.
 
 ?>
