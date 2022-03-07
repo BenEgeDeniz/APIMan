@@ -1,7 +1,7 @@
 
 # APIMan
 
-<img src="https://img.shields.io/badge/build-passing-success"> <img src="https://img.shields.io/badge/version-1.4.4-blue">
+<img src="https://img.shields.io/badge/build-passing-success"> <img src="https://img.shields.io/badge/version-1.4.5-blue">
 
 A powerful API request manager class.
 
